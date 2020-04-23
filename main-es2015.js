@@ -60,8 +60,8 @@ class APIService {
         this.DeleteNote = (noteId) => {
             return this.http.delete('https://jensjorisdecorte-backend-example-2.glitch.me/deletenote?id=' + noteId);
         };
-        this.EditNote = (noteid, note) => {
-            return this.http.put('https://jensjorisdecorte-backend-example-2.glitch.me/editnote?id=' + noteid, { content: note });
+        this.EditNote = (noteId, note) => {
+            return this.http.put('https://jensjorisdecorte-backend-example-2.glitch.me/editnote?id=' + noteId, { content: note });
         };
     }
 }
@@ -262,11 +262,10 @@ class AppComponent {
                 });
             }
             else { // SAVE EDITED NOTE
-                this.apiService.EditNote(this.currentNote.id, newNote).subscribe((data) => {
-                    console.log(data);
+                this.apiService.EditNote(this.currentNote.id, this.newNote).subscribe((response) => {
+                    console.log(response);
                     this.apiService.getNotesForUser(this.currentUser).subscribe((data) => {
                         this.notes = data;
-                        console.log("we are in!", data);
                         this.editNote = false;
                         this.newNote = "";
                     });

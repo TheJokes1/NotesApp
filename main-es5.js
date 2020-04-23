@@ -102,8 +102,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         return _this.http["delete"]('https://jensjorisdecorte-backend-example-2.glitch.me/deletenote?id=' + noteId);
       };
 
-      this.EditNote = function (noteid, note) {
-        return _this.http.put('https://jensjorisdecorte-backend-example-2.glitch.me/editnote?id=' + noteid, {
+      this.EditNote = function (noteId, note) {
+        return _this.http.put('https://jensjorisdecorte-backend-example-2.glitch.me/editnote?id=' + noteId, {
           content: note
         });
       };
@@ -513,12 +513,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               });
             } else {
               // SAVE EDITED NOTE
-              this.apiService.EditNote(this.currentNote.id, newNote).subscribe(function (data) {
-                console.log(data);
+              this.apiService.EditNote(this.currentNote.id, this.newNote).subscribe(function (response) {
+                console.log(response);
 
                 _this6.apiService.getNotesForUser(_this6.currentUser).subscribe(function (data) {
                   _this6.notes = data;
-                  console.log("we are in!", data);
                   _this6.editNote = false;
                   _this6.newNote = "";
                 });
